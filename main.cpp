@@ -11,7 +11,7 @@
 #include "intValidCheck.h"
 #include "AntStep.h"
 
-
+//Now it is changed.
 //function positNumCheck checks if the input is positive number.
 int positNumCheck(int input){
 
