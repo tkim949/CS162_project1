@@ -14,30 +14,6 @@
 #include "AntStep.h"
 #include "validCh.h"
 
-
-//function positNumCheck checks if the input is positive number.
-int positNumCheck(int input){
-
-    if(input > 0) {
-        return input;
-    }
-
-    else {
-        do {
-            //std::cout << "Input" << input << std::endl;
-            std::cout << "Wrong input! You need to input positive integer!" << std::endl;
-
-            std::cin.clear();
-            std::cin.ignore(INT_MAX, '\n');
-
-            std::cout << "Please try again. Input here: " << std::endl;
-            std::cin >> input;
-
-        } while(input<=0);
-    }
-    return input;
-}
-
 //function inValidOneorTwo check if the input is 1 or 2.
 int inValidOneOrTwo(int input) {
 
@@ -71,10 +47,7 @@ int chooseMenu1(){
     //std::cin>>choice;
     std::getline(std::cin, option);
     menu = validCh(option);
-
-    //Call input validation functions.
-    //choice = intValidCheck(choice);
-   // choice = inValidOneOrTwo(choice);
+    menu = inValidOneOrTwo(menu);
 
     switch(menu){
         case 1:
@@ -99,49 +72,31 @@ int main() {
     choiceResult = chooseMenu1();
 
     if(choiceResult == 1) {
-        int numOfStep=0, startRow, startCol, choiceForRanNum;
-        int lengthCol=0, widthRow =0;
+        int lengthCol, widthRow, numOfStep, choiceForRanNum, startRow, startCol;
         std::string length, width, steps, choice, userRow, userCol;
 
         do {
-
             //Ask user to input Board's Length and Width and call input validation function for two inputs.
             std::cin.clear();
             std::cin.ignore(INT_MAX, '\n');
-            std::cout << "Please choose a board size, input positive integer number for length: "<< std::endl;
+            std::cout <<"Please choose a board size, input positive integer number for length: "<< std::endl;
             std::getline(std::cin, length);
             lengthCol = validCh(length);
 
-             //std::cin >> lengthCol;
-             //lengthCol = intValidCheck(lengthCol);
-             //lengthCol = positNumCheck(lengthCol);
-
-            std::cout << "Please input positive integer number for width: "<< std::endl;
+            std::cout <<"Input number for width with a positive integer number: "<< std::endl;
             std::getline(std::cin, width);
-            widthRow = validCh(width);
-            //std::cin >> widthRow;
-            //widthRow = intValidCheck(widthRow);
-            //widthRow = positNumCheck(widthRow);
+            widthRow = validCh(width)
 
             //Ask user to input the number of steps of ant and call input validation function.
-            std::cout << "How many steps do you want the ant goes? Please input positive integer number for steps: "<< std::endl;
-             std::getline(std::cin, steps);
-             numOfStep = validCh(steps);
-            // std::cin >> numOfStep;
-            // numOfStep = intValidCheck(numOfStep);
-            // numOfStep = positNumCheck(numOfStep);
-
-            std::cin.clear();
-            std::cin.ignore(INT_MAX, '\n');
-            std::cout << "Do you want to choose a starting point for the ant or make it start at a random location?"<<
+            std::cout <<"How many steps do you want the ant goes? Please input positive integer number for steps: "<< std::endl;
+            std::getline(std::cin, steps);
+            numOfStep = validCh(steps);
+           
+            std::cout <<"Do you want to choose a starting point for the ant or make it start at a random location?"<<
                       "\nIf you want a random location, input number 1. Or, if you want to choose it by yourself input 2.: "
                       << std::endl;
             std::getline(std::cin, choice);
             choiceForRanNum =validCh(choice);
-           // std::cin >> choiceForRanNum;
-            //valid check for random choice
-            //choiceForRanNum = intValidCheck(choiceForRanNum);
-            //one or check for random choice
             choiceForRanNum = inValidOneOrTwo(choiceForRanNum);
 
             if (choiceForRanNum == 1) {
@@ -158,35 +113,23 @@ int main() {
             else { // choiceForRanNum == 2
 
                 //Ask user to input the start point and then call the input validation function.
-                std::cout << "Please choose the start point, input starting Row: " << std::endl;
+                std::cout <<"Please choose a start point with positive numbers, input starting Row: " << std::endl;
                 std::getline(std::cin, userRow);
-                //std::cin >> startRow;
                 startRow = validCh(userRow)-1;
-                //startRow = intValidCheck(startRow);
-
-                std::cout << "Input starting Column here: " << std::endl;
-                //std::cin >> startCol;
+               
+                std::cout <<"Input starting Column here: " << std::endl;                
                 std::getline(std::cin, userCol);
-                startCol =validCh(userCol)-1;
-               //startCol = intValidCheck(startCol);
+                startCol =validCh(userCol)-1;              
 
                 if (!((startRow < widthRow) && (startCol < lengthCol))){
 
                     while (!((startRow < widthRow) && (startCol < lengthCol))) {
-                        std::cout << "Wrong input! You need to input between the board size" << std::endl;
-
-                        //std::cin.clear();
-                        //std::cin.ignore(INT_MAX, '\n');
-
-                        std::cout << "Please try again. Input start Row: " << std::endl;
-                        //std::cin >> startRow;
-                        //startRow = intValidCheck(startRow);
+                        std::cout <<"Wrong input! You need to input between the board size!"<< std::endl;                 
+                        std::cout <<"Please try again. Input start Row: " << std::endl;                       
                         std::getline(std::cin, userRow);
                         startRow = validCh(userRow)-1;
 
                         std::cout <<"Start Column number here: "<<std::endl;
-                        //std::cin >> startCol;
-                        //startCol = intValidCheck(startCol);
                         std::getline(std::cin, userCol);
                         startCol =validCh(userCol)-1;
                     }
