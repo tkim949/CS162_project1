@@ -13,29 +13,6 @@
 #include "AntStep.h"
 #include "validCh.h"
 
-//function inValidOneorTwo check if the input is 1 or 2.
-int inValidOneOrTwo(int input) {
-
-    if (input == 1 || input == 2) {
-        return input;
-    }
-
-    else {
-        do {
-            std::cout << "Wrong input! You need to input 1 or 2!" <<std::endl;
-			/************************************************************************************
-			**I added below two lines when program didn't wait for user input. It worked well.
-			** However, sometimes, it rather made input delayed or needed a enter key twice.
-			** So, I deleted them, but if it doesn't wait for user's input, it might be needed.
-            **std::cin.clear();
-            **std::cin.ignore(INT_MAX, '\n');
-			************************************************************************************/ 
-            std::cout << "Please try again. Input here: "<<std::endl;
-            std::cin >> input;
-        } while (input != 1 && input != 2);
-    }
-    return input;
-}
 
 //Function to show users menus for choosing to quit or start and get user's choice.
 int chooseMenu1(){
@@ -46,10 +23,29 @@ int chooseMenu1(){
     std::cout<<"Welcome to Langton's Ant simulation. Choose your option."<<std::endl;
     std::cout<<"1. Start Langton's Ant simulation"<<std::endl;
     std::cout<<"2. Quit the simulation"<<std::endl;
-    //std::cin>>choice;
+	std::cout<<"Whenever you give invalid input, you might need to hit or press enter key again, so please input carefully"<<std::endl;
+	std::cout<<"Please input your choice here: ";
     std::getline(std::cin, option);
     menu = validCh(option);
-    menu = inValidOneOrTwo(menu);
+  
+   
+    if (!(menu == 1 || menu == 2)){
+		
+		 do {
+            std::cout << "Wrong input! You need to input 1 or 2! Input here: ";
+			std::getline(std::cin, option);
+            menu = validCh(option);
+			/************************************************************************************
+			**I added below two lines when program didn't wait for user input. It worked well.
+			** However, sometimes, it rather made input delayed or needed a enter key twice.
+			** So, I deleted them, but if it doesn't wait for user's input, it might be needed.
+            **std::cin.clear();
+            **std::cin.ignore(INT_MAX, '\n');
+			************************************************************************************/ 
+			
+            
+        } while (!(menu == 1 || menu == 2));
+	}
 
     switch(menu){
         case 1:
@@ -73,22 +69,22 @@ int main() {
 
     //Call menu function to show users the menu and get user's choice
     choiceResult = chooseMenu1();
+	
+	std::cout<<std::endl;
 
     if(choiceResult == 1) {
         int lengthCol, widthRow, numOfStep, choiceForRanNum, startRow, startCol;
         std::string length, width, steps, choice, userRow, userCol;
 
         do {
-            std::cout<<"When you input invalid data, you might hit enter key again while inputting data if it  is needed"<<std::endl;
-	    std::cout<<std::endl;
-            /*****************************************************************************************************
-	    * * I put below two lines here because these two line can clear garbage input data.
-	    * * However, two many line clears might cause key board delay.
-            * * Two set of clear lines are okay, but if users make always correct inputs or there is little
-	    * * invalid input, it also might cause key board delay or have user click enter key again.
-	    *******************************************************************************************************/
-           // std::cin.clear();
-          //  std::cin.ignore(INT_MAX, '\n');
+            
+             /***************************************************************************************
+		     * * I added below two lines when program didn't wait for user input. It worked well.
+		     * * However, sometimes, it rather made input delayed or needed a enter key twice.
+		     * * So, I deleted two lines, but if there is lots of garbage inputs, it might be needed.
+             * * std::cin.clear();
+             * * std::cin.ignore(INT_MAX, '\n');
+		     ****************************************************************************************/
 
 			//Ask user to input Board's Length and Width and call input validation function for two inputs.
             std::cout <<"Please choose a board size, please input 200 or less positive numbers, "<<std::endl;
@@ -96,10 +92,10 @@ int main() {
             std::getline(std::cin, length);
             lengthCol = validCh(length);
 
-            if (lengthCol >200){
+            if (lengthCol > 200){
 
                 while (lengthCol > 200) {
-                    std::cout <<"Wrong input! Please try again. please input 200 or less for length: "<< std::endl;
+                    std::cout <<"Wrong input! Please try again. please input 200 or less for length: ";
                     std::getline(std::cin, length);
                     lengthCol = validCh(length);
                 }
@@ -109,18 +105,18 @@ int main() {
             std::getline(std::cin, width);
             widthRow = validCh(width);
 
-            if (widthRow >200){
+            if (widthRow > 200){
 
                 while (widthRow > 200) {
-                    std::cout <<"Wrong input! Please try again. please input 200 or less for width: "<< std::endl;
+                    std::cout <<"Wrong input! Please try again. please input 200 or less for width: ";
                     std::getline(std::cin, width);
                     widthRow = validCh(width);
                 }
             }
 
-
             //Ask user to input the number of steps of ant and call input validation function.
-            std::cout <<"How many steps do you want the ant goes? Please input positive integer number 25000 or less: "<< std::endl;
+            std::cout <<"How many steps do you want the ant goes?\n";
+			std::cout<<"Please input positive integer number 25000 or less: ";
             std::getline(std::cin, steps);
             numOfStep = validCh(steps);
 
@@ -128,7 +124,7 @@ int main() {
 
                 while (numOfStep > 25000) {
                     std::cout <<"Wrong input! Input up to 25000!"<< std::endl;
-                    std::cout <<"Please try again. Input number for ant step 25000 or less: " << std::endl;
+                    std::cout <<"Please try again. Input number for ant step 25000 or less: ";
                     std::getline(std::cin, steps);
                     numOfStep = validCh(steps);
                 }
@@ -136,10 +132,20 @@ int main() {
            
             std::cout <<"Do you want to choose a starting point for the ant or make it start at a random location?\n";
             std::cout<<"If you want a random location, input number 1 Or,\n";
-			std::cout<<"if you want to choose it by yourself input 2 "<<std::endl;
+			std::cout<<"if you want to choose it by yourself input 2: ";
             std::getline(std::cin, choice);
-            choiceForRanNum =validCh(choice);
-            choiceForRanNum = inValidOneOrTwo(choiceForRanNum);
+            choiceForRanNum = validCh(choice);
+            
+			
+			 if (!(choiceForRanNum == 1 || choiceForRanNum == 2)){
+		
+		        do {
+					std::cout << "Wrong input! You need to input 1 or 2! Input here: ";
+					std::getline(std::cin, choice);
+					choiceForRanNum = validCh(choice);
+            
+				} while(!(choiceForRanNum == 1 || choiceForRanNum == 2));
+			}
 
             if (choiceForRanNum == 1) {
 
@@ -152,35 +158,34 @@ int main() {
                 startCol = dist2(mt);
 				
 				std::cout<<"The random location for you is: ["<<startRow<<" : "<<startCol<<"]"<<std::endl;
-				std::cout<<"Now start the simulation!"<<std::endl;
-				
+				std::cout<<"Now start the simulation!"<<std::endl;	
             }
 
             else { // choiceForRanNum == 2
 
                 //Ask user to input the start point and then call the input validation function.
                 std::cout <<"Please choose start row and column points within the board size!"<<std::endl;
-				std::cout<<"Input your Row number that is "<<widthRow<<" or less:\n";
+				std::cout<<"Input your Row number that is "<<widthRow<<" or less: ";
                 std::getline(std::cin, userRow);
                 startRow = validCh(userRow)-1;
 
                 if (startRow > widthRow-1){
 
                     while (startRow >  widthRow-1) {
-                        std::cout <<"Wrong input! Please try again. please input number that is "<<widthRow<<" or less"<<std::endl;
+                        std::cout <<"Wrong input! Please try again. please input number that is "<<widthRow<<" or less: ";
                         std::getline(std::cin, userRow);
                         startRow = validCh(userRow)-1;
                     }
                 }
                
-                std::cout <<"Now, Input starting Column that is "<<lengthCol<<" or less:\n ";
+                std::cout <<"Now, input your starting Column number that is "<<lengthCol<<" or less: ";
                 std::getline(std::cin, userCol);
                 startCol =validCh(userCol)-1;
 
                 if (startCol > lengthCol-1){
 
                     while (startCol > lengthCol-1) {
-                        std::cout <<"Wrong input! Please try again. please input number that is "<<lengthCol<<" or less"<<std::endl;
+                        std::cout <<"Wrong input! Please try again. please input number that is "<<lengthCol<<" or less. Input here: ";
                         std::getline(std::cin, userCol);
                         startCol =validCh(userCol)-1;
                     }
@@ -215,12 +220,12 @@ int main() {
             }
             delete[] array;
 
-            std::cout<<"Do you want to play again?\nIf you want to play, input number 1. Otherwise, click any key!"<< std::endl;
+            std::cout<<"Do you want to play again?\nIf you want to play, input number 1. Otherwise, click any key here: ";
 			std::cin>>playAgain;
 			
         } while (playAgain==1);
 
-        std::cout << "You want to quit. Good buy! See you again!" << std::endl;
+        std::cout <<"You want to quit. Good buy! See you again!" << std::endl;
     }
     return 0;
 }
