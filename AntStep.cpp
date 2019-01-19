@@ -60,7 +60,7 @@ void AntStep::setColLocate(int colA){
 void AntStep::antLocate() {
 
 
-    for (int i = 0; i <numOfSteps; i++) {
+    for (int i = 0; i < numOfSteps; i++) {
 
         int preRowSteps[numOfSteps-1];
         int preColSteps[numOfSteps-1];
@@ -84,13 +84,17 @@ void AntStep::antLocate() {
         std::cout<<i+1<<": the Ant step number"<<std::endl;
         std::cout<<"Current Ant Direction: "<<getDirection()<<std::endl;
         std::cout <<"Current Ant location ["<<getRowLocate()<<" , " <<getColLocate()<<"]"<<std::endl;
-        std::cout<<std::endl;
+        
 
         //When the cell color is white.
         if (arr[getRowLocate()][getColLocate()] == ' ') {
             arr[getRowLocate()][getColLocate()] = '*';
 
             std::cout << "The cell color is White." << std::endl;
+			std::cout<<std::endl;
+			 //Change the board color to black with ant so that we can track the cell.
+            setBColor(B_ANT);
+			
             //Go to East when the direction is north if the cell color is white.
             if (getDirection() == NORTH) {
                 setDirection(EAST);
@@ -141,15 +145,18 @@ void AntStep::antLocate() {
                 std::cout <<"New Ant location when West: ["<<getRowLocate()<<" , " <<getColLocate()<<"]"<<std::endl;
                 std::cout<<"New Ant Direction when West: "<<getDirection()<<std::endl;
             }
-            //Change the board color to black with ant so that we can track the cell.
-            setBColor(B_ANT);
+           
 
         }
         //When the cell color is black.
         else if (arr[getRowLocate()][getColLocate()]== '#') {
             arr[getRowLocate()][getColLocate()] = '*';
-
+			
             std::cout << "The cell color is Black." << std::endl;
+			std::cout<<std::endl;
+			
+			//Change the board color to white with ant so that we can track the cell.
+            setBColor(W_ANT);
 
             //Go to West when the direction is North if the cell color is Black.
             if (getDirection() == NORTH) {
@@ -203,8 +210,7 @@ void AntStep::antLocate() {
                 std::cout <<"New Ant location when West: ["<<getRowLocate()<<" , " <<getColLocate()<<"]"<<std::endl;
                 std::cout<<"New Ant Direction when West: "<<getDirection()<<std::endl;
             }
-            //Change the board color to white with ant so that we can track the cell.
-            setBColor(W_ANT);
+            
          }
 
         std::cout<<"Below is the board to show the Ant steps: " <<std::endl;
