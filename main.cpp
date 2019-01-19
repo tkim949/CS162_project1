@@ -61,7 +61,7 @@ int chooseMenu1(){
         default:
             std::cout<<"You didn't choose 1 or 2"<<std::endl;
     }
-    std::cout<<std::endl;
+    
     return menu;
 }
 
@@ -79,15 +79,16 @@ int main() {
         std::string length, width, steps, choice, userRow, userCol;
 
         do {
-            std::cout<<"If it is needed, you might hit enter key again while inputting data"<<std::endl;
+            std::cout<<"When you input invalid data, you might hit enter key again while inputting data if it  is needed"<<std::endl;
+	    std::cout<<std::endl;
             /*****************************************************************************************************
-			* * I put below two lines here because these two line can clear garbage input data.
-			* * However, two many line clears might cause key board delay.
+	    * * I put below two lines here because these two line can clear garbage input data.
+	    * * However, two many line clears might cause key board delay.
             * * Two set of clear lines are okay, but if users make always correct inputs or there is little
-			* * invalid input, it also might cause key board delay or have user click enter key again.
-			*******************************************************************************************************/
-            std::cin.clear();
-            std::cin.ignore(INT_MAX, '\n');
+	    * * invalid input, it also might cause key board delay or have user click enter key again.
+	    *******************************************************************************************************/
+           // std::cin.clear();
+          //  std::cin.ignore(INT_MAX, '\n');
 
 			//Ask user to input Board's Length and Width and call input validation function for two inputs.
             std::cout <<"Please choose a board size, please input 200 or less positive numbers, "<<std::endl;
@@ -156,9 +157,6 @@ int main() {
             }
 
             else { // choiceForRanNum == 2
-                //The second line clear set
-                std::cin.clear();
-                std::cin.ignore(INT_MAX, '\n');
 
                 //Ask user to input the start point and then call the input validation function.
                 std::cout <<"Please choose start row and column points within the board size!"<<std::endl;
