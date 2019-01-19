@@ -27,12 +27,12 @@ int validCh(std::string info) {
             break;
         }
         /************************************************************************************
-		* * I added below two lines when program didn't wait for user input. It worked well.
-		* * However, sometimes, it rather made input delayed or needed a enter key twice.
-		* * So, I deleted two lines, but if there is lots of garbage inputs, it may be needed.
-        * * std::cin.clear();
-        * * std::cin.ignore(INT_MAX, '\n');
-		************************************************************************************/
+	* * I added below two lines when program didn't wait for user input. It worked well.
+	* * However, sometimes, it rather made input delayed or needed a enter key twice.
+	* * So, I deleted two lines, but if there is lots of garbage inputs, it may be needed
+	************************************************************************************/
+	std::cin.clear();
+        std::cin.ignore(INT_MAX, '\n');  
         std::cout << "Invalid input! please try again" << std::endl;
         getline(std::cin, info);
     }
