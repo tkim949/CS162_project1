@@ -226,22 +226,24 @@ int main() {
 
             antS.antLocate();
 			
-			std::cout<<"The starting location in the board was: ["<<startRow<<" : "<<startCol<<"]"<<std::endl;
-			std::cout<<"The starting points in the board shows one less than your choice because of the board number system."<<std::endl;
-			std::cout<<"The board size was Length(Column): "<<lengthCol<<" and Width(Row): "<<widthRow<<std::endl;
-			std::cout<<"The ant moved "<<numOfStep<<" steps"<<std::endl;
-			std::cout<<std::endl;
-			
-            std::cout<<"Do you want to play again?\nIf you want to play, input number 1. Otherwise, click any key here: ";
-			std::cin>> playAgain;
-			std::cout<<std::endl;
-			
+	   		
 			 //Clear the array
             for (int i = 0; i < widthRow; i++) {
+		    
                 delete[] array[i];
             }
             delete[] array;
 			
+		  std::cout<<"The starting location in the board was: ["<<startRow<<" : "<<startCol<<"]"<<std::endl;
+		  std::cout<<"The starting points in the board shows one less than your choice because of the board number system."<<std::endl;
+		  std::cout<<"The board size was Length(Column): "<<lengthCol<<" and Width(Row): "<<widthRow<<std::endl;
+		  std::cout<<"The ant moved "<<numOfStep<<" steps"<<std::endl;
+		  std::cout<<std::endl;
+			
+            std::cout<<"Do you want to play again?\nIf you want to play, input number 1. Otherwise, click any key here: ";
+			std::cin>> playAgain;
+			std::cout<<std::endl;
+	
         } while (playAgain==1);
 
         std::cout <<"You want to quit. Good buy! See you again!" << std::endl;
