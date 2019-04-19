@@ -6,8 +6,8 @@
  ***************************************************************************************************/
 
 
-#ifndef PROJECT1_1_ANTSTEP_H
-#define PROJECT1_1_ANTSTEP_H
+#ifndef ANTSTEP_H
+#define ANTSTEP_H
 
 enum Direction {NORTH, SOUTH, EAST, WEST};
 
